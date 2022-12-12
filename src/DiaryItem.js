@@ -1,6 +1,9 @@
-import { useRef, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
+import { DiaryDispatchContext } from "./App"
 
-const DiaryItem = ({author, content, emotion, created_date, id, onRemove, onEdit}) => {
+const DiaryItem = ({author, content, emotion, created_date, id}) => {
+  const { onRemove, onEdit } = useContext(DiaryDispatchContext)
+  
   const handleRemove = () => {
     if (window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)){
       onRemove(id)
@@ -61,4 +64,4 @@ const DiaryItem = ({author, content, emotion, created_date, id, onRemove, onEdit
   )
 }
 
-export default DiaryItem
+export default React.memo(DiaryItem)
