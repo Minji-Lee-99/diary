@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# 간단한 일기장 프로젝트 - 한입 크기로 잘라 먹는 리액트
+## 나만의 기능 - 이모지 삽입
+![](https://velog.velcdn.com/images/alswl2487/post/b97ab449-ed05-402c-b385-152b4221ea58/image.png)
+위 사진에 있는 이모티콘을 클릭하면 이모티콘 선택 영역이 보여진다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![](https://velog.velcdn.com/images/alswl2487/post/301f34d3-8c37-4700-8223-5c8397b0d474/image.png)
+이모티콘을 선택하면 자동으로 일기장에 이모티콘이 추가됩니다.
 
-## Available Scripts
+![](https://velog.velcdn.com/images/alswl2487/post/8b80b2b5-2359-4962-b7d4-69a7815c8aa1/image.png)
 
-In the project directory, you can run:
+```python 
+// DiaryEditor에서 해당 부분만 발췌
+  // component 함수 내부
+  const [showEmoji, setShowEmoji] = useState(false)
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  const chooseEmoji = (type) => {
+    const emoji = {
+      "1": "😀",
+      "2": "😅",
+      "3": "😂",
+      "4": "🥰",
+      "5": "😵",
+      "6": "😤",
+      "7": "😢",
+      "8": "😱",
+      "9": "😡",
+    }
+    setState({
+      ...state,
+      content: state.content + emoji[type]
+    })
+  }
+  
+  // return 내부
+  <div>
+    {/* 이모티콘 삽입하기 */}
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" className="bi bi-emoji-smile" viewBox="0 0 16 16" onClick={() => setShowEmoji(!showEmoji)}>
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+      <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+    </svg>
+    {showEmoji && <div style={{border: "solid 1px gray", width: 500, marginLeft: "auto", marginRight: "auto"}}>
+      <span onClick={() => chooseEmoji("1")}>😀</span>
+      <span onClick={() => chooseEmoji("2")}>😅</span>
+      <span onClick={() => chooseEmoji("3")}>😂</span>
+      <span onClick={() => chooseEmoji("4")}>🥰</span>
+      <span onClick={() => chooseEmoji("5")}>😵</span>
+      <span onClick={() => chooseEmoji("6")}>😤</span>
+      <span onClick={() => chooseEmoji("7")}>😢</span>
+      <span onClick={() => chooseEmoji("8")}>😱</span>
+      <span onClick={() => chooseEmoji("9")}>😡</span>
+     </div>}
+  </div>
+```
